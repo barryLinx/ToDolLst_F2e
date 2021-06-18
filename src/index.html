@@ -1,12 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
 </head>
-<body>
-  
+
+<body class="bg-gray-100">
+  <header class="bg-primary mb-0">
+    <section class="container-md ">
+      <nav class="">
+        <ul class="nav-tab fs-3 d-flex justify-content-center">
+          <li class="nav-item me-5 px-2 py-3 active">
+            <a href="" class="nav-link text-secondary px-4 py-3 ff-Rob">My Tasks</a>
+          </li>
+          <li class="nav-item me-5 px-2 py-3  ">
+            <a href="" class="nav-link text-secondary px-4 py-3 ff-Rob">In Progress</a>
+          </li>
+          <li class="nav-item me-5 px-2 py-3">
+            <a href="" class="nav-link text-secondary px-4 py-3 ff-Rob">Completed</a>
+          </li>
+        </ul>
+      </nav>
+    </section>
+
+  </header>
+  <main class="">
+    <article class="container-md ">
+      <!-- ADD Task -->
+      <section class="d-flex justify-content-center mb-3">
+        <!-- <input type="button" class="w-50 bg-white text-black" placeholder="+ Add Task"> -->
+        <button class="w-50 px-3 bg-white border-0 d-flex justify-content-start">
+          <p class="p-2 m-0 text-gray fs-3 ff-Rob">
+            <i class="fas fa-plus me-2"></i>
+            Add Task
+          </p>
+        </button>
+      </section>
+      <!-- ADD Task End-->
+      <!-- Edit Button -->
+      <section class="edit d-flex justify-content-center  mb-1">
+        <div class="w-50 d-flex px-4 py-3 bg-light">
+          <div class="me-auto d-inline-block">
+            <input type="checkbox" class="w-6 h-6 me-3">
+            <span class="ff-Rob fs-3">Type Something Here…</span>
+          </div>
+          <div class="d-inline-block fs-3">
+            <a href="" class="markStar text-black text-decoration-no">
+              <i class="far fa-star"></i>
+            </a>
+            <a href="" class="edit-pencil text-primary text-decoration-no">
+              <i class="fas fa-pencil-alt"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- Edit Button End-->
+      <!-- Edit Content -->
+      <section class="edit-content d-flex justify-content-center">
+        <div class="d-flex flex-column w-50">
+          <form class="needvail bg-light p-5">
+            <div class="form-control mb-5">
+              <div class="ms-4">
+                <label for="yeardate" class="ps-3">
+                  <span><i class="far fa-calendar-alt fs-4"></i>
+                  </span>
+                  <span class="ff-Rob fs-4 ps-1">Deadline</span>
+                </label>
+              </div>
+              <div class="ps-5 ms-4">
+                <input id="yeardate" class="border-0 py-1 px-2" placeholder="yyyy/mm/dd">
+                <input id="timestamp" class="border-0 py-1 px-2" placeholder="hh:mm">
+              </div>
+            </div>
+
+            <div class="form-control mb-5">
+              <div class="ms-4">
+                <label for="fupload" class="ps-3">
+                  <span> <i class="far fa-file fs-4"></i></span>
+                  <span class="ms-2 ff-Rob fs-4">File</span>
+                </label>
+              </div>
+              <div class="ps-5 ms-4">
+                <span>
+                  20180514.zip                       
+                </span>
+                <span>uploaded yesterday</span>    
+                <label for="fupload" class="bg-gray p-2 c-p d-inline">
+                  <i class="fas fa-plus fs-4 text-white"></i>
+                </label>
+                <input id="fupload" type="file" hidden>              
+              </div>
+            </div>
+
+            <div class="form-control mb-5">
+              <div class="ms-4">
+                <label for="message" class="ps-3">
+                  <span>
+                    <i class="far fa-comment-dots fs-4"></i>
+                  </span>
+                  <span class="ms-2 ff-Rob fs-4">Comment</span>
+                </label>
+              </div>
+              <div class="ps-5 ms-4">
+                <textarea id="message" rows="5" cols="42"></textarea>
+              </div>
+            </div>
+          </form>
+          <div class="footer d-flex justify-content-center">            
+            <button class="w-50 fs-3 p-3 border-0 bg-white text-danger">
+              <i class="fas fa-times me-3"></i>
+              Cancel
+            </button>
+            <button class="w-50 fs-3 p-3 border-0 bg-primary text-white">
+              <i class="fas fa-plus me-3"></i>
+              Add Task
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- Edit Content End -->
+      <!-- List -->
+      <section>
+        <ul class="task-list">
+          <li></li>
+
+        </ul>
+
+      </section>
+      <!-- List End-->
+
+    </article>
+
+  </main>
 </body>
+
 </html>

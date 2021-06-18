@@ -36,7 +36,7 @@ module.exports = {
         }
       },
       {
-        test: /.\s[ac]ss$/i,
+        test: /\.s[ac]ss$/i,
         use: [
           {
             // inject CSS to page

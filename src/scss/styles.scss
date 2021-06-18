@@ -2,7 +2,7 @@
 //// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "../../node_modules/bootstrap/scss/functions";
 //// 2. Include any default variable overrides here
-@import 'custom/varable.scss';
+@import './custom/variables';
 //// 3. Include remainder of required Bootstrap stylesheets
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/mixins";
@@ -18,4 +18,15 @@
 
 
 // Utilities
-@import "utilities/api";
+@import "./custom/utilities";
+@import "../../node_modules/bootstrap/scss/utilities/api";
+
+
+//引入fontawesome樣式
+// @import '../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss';
+// @import '../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss';
+// @import '../../node_modules/@fortawesome/fontawesome-free/scss/regular.scss';
+// @import '../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss';
+
+@import "./custom/custom";
+

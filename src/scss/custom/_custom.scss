@@ -1,0 +1,23 @@
+
+
+ul.nav-tab{
+  list-style: none;
+  .nav-item{ 
+    &.active{
+      border-bottom: 5px solid $secondary;      
+      a.nav-link{
+        color: $white !important;
+      }
+    }   
+    a.nav-link{
+      text-decoration:none;  
+      &:hover{      
+        cursor: pointer;
+        color: $white !important;      
+      }      
+    }
+  }
+
+}
+
+

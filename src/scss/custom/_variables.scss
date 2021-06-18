@@ -1,19 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+
+$white:#FFFFFF;
+$black:#000000;
+$secondary:#00408B;
+$primary:#4A90E2;
+$info : #FFF2DC;
+$danger:#D0021B;
 
 $theme-colors: (
   "primary":    #4A90E2 ,
-  "secondary": #00408B,
-  "success":    $success,
+  "secondary":  $secondary,
+  "success":    #198754,
   "info":     #FFF2DC,
   "warning":  #F5A623,
   "danger":   #D0021B,
   "light":    #F2F2F2,
   "dark":     #757575,
   "gray":     #C8C8C8, 
-  "gray-100":#E1E1E1
-  "black":    #000000,
-  "white":    #FFFFFF  
+  "gray-100":#E1E1E1,
+  "black":    $black,
+  "white":    $white  
 ) !default;
 $font-family-Roboto-700: 'Roboto', sans-serif;
 $font-family-Roboto-100: 'Roboto-Regular', sans-serif;
