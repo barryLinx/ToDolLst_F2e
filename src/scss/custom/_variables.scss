@@ -7,6 +7,7 @@ $secondary:#00408B;
 $primary:#4A90E2;
 $info : #FFF2DC;
 $danger:#D0021B;
+$gray-200:#9B9B9B;
 
 $theme-colors: (
   "primary":    #4A90E2 ,
@@ -19,6 +20,7 @@ $theme-colors: (
   "dark":     #757575,
   "gray":     #C8C8C8, 
   "gray-100":#E1E1E1,
+  "gray-200": $gray-200,
   "black":    $black,
   "white":    $white  
 ) !default;
