@@ -5,7 +5,7 @@ import {faPencilAlt,faStar,faPlus} from '@fortawesome/fontawesome-free-solid';
 import {faFile,faCommentDots,faCalendarAlt} from '@fortawesome/fontawesome-free-regular';
 
 library.add(faPlus,faPencilAlt, faFile, faStar,faCommentDots,faCalendarAlt)
-console.log(" test ")
+
 
 
 // <i class="fas fa-pencil-alt"></i>
