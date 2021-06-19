@@ -7,6 +7,19 @@ import {faFile,faCommentDots,faCalendarAlt} from '@fortawesome/fontawesome-free-
 library.add(faPlus,faPencilAlt, faFile, faStar,faCommentDots,faCalendarAlt)
 
 
+const addTaskBtn = document.querySelector('.addtaskBtn');
+const editPencilBtn = document.querySelector('.edit-pencil-btn');
+
+
+/**
+ * init
+ */
+document.addEventListener('DOMContentLoaded',()=>{
+
+})
+
+
+
 
 // <i class="fas fa-pencil-alt"></i>
 // <i class="far fa-file"></i>
