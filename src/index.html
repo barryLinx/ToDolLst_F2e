@@ -77,7 +77,6 @@
                 <input id="timestamp" class="border-0 py-1 px-2" placeholder="hh:mm">
               </div>
             </div>
-
             <div class="form-control mb-5">
               <div class="ms-4">
                 <label for="fupload" class="ps-3">
@@ -128,36 +127,42 @@
       <!-- Edit Content End -->
       <!-- List -->
       <section class="list d-flex justify-content-center">
-        <ul class="task-list w-50 ps-0">
+        <ul class="task-list ps-0 w-50">
           <li class="w-100 px-4 py-3 bg-info mb-3">
-            <div class="d-flex">
-              <div class="me-auto d-inline-block">
-                <input type="checkbox" class="w-6 h-6 me-3">
-                <span class="ff-Rob fs-3">Type Something Here…</span>               
+         
+              <div class="d-flex">
+                <div class="me-auto d-inline-block">
+                  <input type="checkbox" class="w-6 h-6 me-3">
+                  <span class="ff-Rob fs-3">Type Something Here…</span>
+                </div>
+                <div class="d-inline-block fs-3">
+                  <a href="" class="markStar text-warning text-decoration-no">
+                    <i class="fas fa-star"></i>
+                  </a>
+                  <a href="" class="edit-pencil text-black text-decoration-no">
+                    <i class="fas fa-pencil-alt"></i>
+                  </a>
+                </div>
               </div>
-              <div class="d-inline-block fs-3">
-                <a href="" class="markStar text-warning text-decoration-no">
-                  <i class="fas fa-star"></i>
-                </a>
-                <a href="" class="edit-pencil text-black text-decoration-no">
-                  <i class="fas fa-pencil-alt"></i>
-                </a>
+              <!-- record status  -->
+              <div class="record ps-4 ms-4 text-dark  ">
+                <i class="far fa-comment-dots fs-5 me-3"></i>
+                <i class="far fa-file fs-5 me-3"></i>
+                <span class="calendar me-3">
+                  <i class="far fa-calendar-alt fs-5 me-2"></i>
+                  <span>6/18</span>
+                </span>
               </div>
-            </div>
-            <div class="record ps-4 ms-4 text-dark ">
-              <i class="far fa-comment-dots fs-5 me-3"></i>
-              <i class="far fa-file fs-5 me-3"></i>
-              <span class="calendar me-3">
-                <i class="far fa-calendar-alt fs-5 me-2"></i>
-                <span>6/18</span>
-              </span>              
-            </div>
+              <!-- record status End  -->
+                       
           </li>
+
           <li class="w-100 px-4 py-3 bg-light mb-3">
+            
             <div class="d-flex">
               <div class="me-auto d-inline-block">
                 <input type="checkbox" class="w-6 h-6 me-3">
-                <span class="ff-Rob fs-3">Type Something Here…</span>               
+                <span class="ff-Rob fs-3">Type Something Here…</span>
               </div>
               <div class="d-inline-block fs-3">
                 <a href="" class="markStar text-black text-decoration-no">
@@ -174,7 +179,7 @@
               <span class="calendar me-3">
                 <!-- <i class="far fa-calendar-alt fs-5 me-2"></i>
                 <span>6/18</span> -->
-              </span>              
+              </span>
             </div>
           </li>
           <li class="w-100 px-4 py-3 bg-light mb-3">
@@ -183,9 +188,9 @@
                 <input type="checkbox" checked class="w-6 h-6 me-3">
                 <del class="text-gray-200">
                   <span class="ff-Rob fs-3 ">
-                     Type Something Here…  
+                    Type Something Here…
                   </span>
-                </del>   
+                </del>
               </div>
               <div class="d-inline-block fs-3">
                 <a href="" class="markStar text-black text-decoration-no">
@@ -210,12 +215,12 @@
       <!-- List End-->
 
       <!-- Total Task -->
-      <section class=" d-flex justify-content-center mb-3">        
-          <p class="text-gray fs-3 w-50 ">
-            4 tasks left
-          </p>
+      <section class=" d-flex justify-content-center mb-3">
+        <p class="text-gray fs-3 w-50 ">
+          4 tasks left
+        </p>
       </section>
-       <!-- Total Task End-->
+      <!-- Total Task End-->
 
     </article>
 
