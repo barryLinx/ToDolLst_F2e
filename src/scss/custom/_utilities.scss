@@ -60,6 +60,14 @@ $utilities: map-merge(
       values:(
         p:pointer,        
       )
+    ),
+    'outline':(
+      property:outline,
+      class:outline,
+      values:(
+        0:none
+      )
+
     )
     // 'padding':(
     //   property: padding,
