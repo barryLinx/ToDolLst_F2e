@@ -44,7 +44,6 @@ function spanTitleDom(){
   return sapn;
 }
 
-
 function inputcheck_change() {
   inputCheckDom.forEach(el => {
     el.addEventListener('change', (event) => {
