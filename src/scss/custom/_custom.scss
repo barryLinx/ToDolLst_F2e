@@ -27,3 +27,25 @@ ul.task-list{
   }  
 }
 
+input.addInput::placeholder{
+  color: $gray;
+}
+
+
+input.addInput{
+  width: 545px;
+}
+
+// input.addInput:invalid {
+//   //border: 2px dashed red;
+//   //background-image: linear-gradient(to right, pink, lightgreen);
+// }
+
+// input.addInput:invalid:required {
+//   //background-image: linear-gradient(to right, pink, lightgreen);
+//   border-bottom:1px solid $gray-200;
+// }
+
+// input.addInput:valid {
+//   border: 2px dashed red;
+// }

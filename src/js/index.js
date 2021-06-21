@@ -6,17 +6,28 @@ import { faFile, faCommentDots, faCalendarAlt } from '@fortawesome/fontawesome-f
 
 library.add(faPlus, faPencilAlt, faFile, faStar, faCommentDots, faCalendarAlt)
 
-
+const addInput = document.querySelector('.addInput');
 const addTaskBtn = document.querySelector('#addTaskBtn');
+
+const editCheck = document.querySelector('.editCheck');
+const editTitle = document.querySelector('.editTitle');
 const editPencilBtn = document.querySelector('.edit-pencil-btn');
+const editStar = document.querySelector('.editStar');
 const editBtn = document.querySelector('.editBtn');
 const editContent = document.querySelector('.edit-content');
+const editFileName = document.querySelector('#editFileName');
+const editFileTime = document.querySelector('#editFileTime');
+const editDateTime = document.querySelector('#editDateTime');
+const editMessage = document.querySelector('#editMessage');
+
 const navLinkDom = [...document.querySelectorAll('.nav-link')];
+const fupload = document.querySelector('#fupload');
 const fromCancel = document.querySelector('.from-cancel');
 const fromAdd = document.querySelector('.from-add')
 
 const inputCheckDom = [...document.querySelectorAll('.hascheck')];
 let alldata = [];
+let editObj={};
 
 
 function delTitleDom() {
@@ -39,11 +50,14 @@ function delTitleDom() {
 function spanTitleDom(){
   let title = document.createTextNode('Type Something Here…');
   let sapn = document.createElement('span');
-  sapn.classList.add('ff-Rob','fs-3', 'todo-title');
+  sapn.classList.add('ff-Rob','fs-3');
   sapn.appendChild(title);
   return sapn;
 }
 
+/**
+ * 改變 標題 樣式 加上 <del></del>
+ */
 function inputcheck_change() {
   inputCheckDom.forEach(el => {
     el.addEventListener('change', (event) => {
@@ -63,7 +77,10 @@ function inputcheck_change() {
 }
 
 
-
+/**
+ * Tab 頁籤切換樣式
+ * @param {*} element 
+ */
 function hasActive(element) {
   console.log("element", element);
   navLinkDom.forEach(n => {
@@ -72,7 +89,6 @@ function hasActive(element) {
     }
   })
   element.classList.add('active');
-
 }
 
 
@@ -83,99 +99,17 @@ function filter_Event(param = '') {
 }
 
 
+
+
 //display products UI
 class UI {
-  // editUI(dataObj) {
-  //   const editSection = document.querySelector('.edit');
-  //   let str = `<div class="w-50 d-flex px-4 py-3 bg-light">
-  //   <div class="me-auto d-inline-block">
-  //     <input type="checkbox" class="w-6 h-6 me-3">
-  //     <span class="ff-Rob fs-3">Type Something Here…</span>
-  //   </div>
-  //   <div class="d-inline-block fs-3">
-  //     <a href="" class="markStar text-black text-decoration-no">
-  //       <i class="far fa-star"></i>
-  //     </a>
-  //     <a href="" class="edit-pencil-btn text-primary text-decoration-no">
-  //       <i class="fas fa-pencil-alt"></i>
-  //     </a>
-  //   </div>
-  // </div>`;
-  //   editSection.innerHTML = str;
-  // }
-  // editContent(dataObj) {
-  //   const editcontent = document.querySelector('.edit-content');
-
-  //   let str = `<div class="d-flex flex-column w-50">
-  //   <form class="needvail bg-light p-5">
-  //     <div class="form-control mb-5">
-  //       <div class="ms-4">
-  //         <label for="yeardate" class="ps-3">
-  //           <span><i class="far fa-calendar-alt fs-4"></i>
-  //           </span>
-  //           <span class="ff-Rob fs-4 ps-1">Deadline</span>
-  //         </label>
-  //       </div>
-  //       <div class="ps-5 ms-4">
-  //         <input id="yeardate" class="border-0 py-1 px-2" placeholder="yyyy/mm/dd">
-  //         <input id="timestamp" class="border-0 py-1 px-2" placeholder="hh:mm">
-  //       </div>
-  //     </div>
-  //     <div class="form-control mb-5">
-  //       <div class="ms-4">
-  //         <label for="fupload" class="ps-3">
-  //           <span> <i class="far fa-file fs-4"></i></span>
-  //           <span class="ms-2 ff-Rob fs-4">File</span>
-  //         </label>
-  //       </div>
-  //       <div class="ps-5 ms-4 d-flex">
-  //         <div class="me-3">
-  //           <p class="m-0 fs-6 ff-Rob">
-  //             20180514.zip
-  //           </p>
-  //           <p class="m-0 text-dark ff-Rob">uploaded yesterday</p>
-  //         </div>
-  //         <label for="fupload" class="bg-gray px-3 py-2 c-p d-flex align-items-center">
-  //           <i class="fas fa-plus fs-5 text-white"></i>
-  //         </label>
-  //         <input id="fupload" type="file" hidden>
-  //       </div>
-  //     </div>
-
-  //     <div class="form-control mb-5">
-  //       <div class="ms-4">
-  //         <label for="message" class="ps-3">
-  //           <span>
-  //             <i class="far fa-comment-dots fs-4"></i>
-  //           </span>
-  //           <span class="ms-2 ff-Rob fs-4">Comment</span>
-  //         </label>
-  //       </div>
-  //       <div class="ps-5 ms-4">
-  //         <textarea id="message" rows="5" cols="42"></textarea>
-  //       </div>
-  //     </div>
-  //   </form>
-  //   <div class="footer d-flex justify-content-center">
-  //     <button class="w-50 fs-3 p-3 border-0 bg-white text-danger ff-Rob">
-  //       <i class="fas fa-times me-3"></i>
-  //       Cancel
-  //     </button>
-  //     <button class="w-50 fs-3 p-3 border-0 bg-primary text-white ff-Rob">
-  //       <i class="fas fa-plus me-3"></i>
-  //       Add Task
-  //     </button>
-  //   </div>
-  // </div>`;
-
-  //   editcontent.innerHTML = str;
-  // }
+  
   addTaskBtn_hide_UI() {
     //let style = getComputedStyle(addTaskBtn, 'display');
-    addTaskBtn.classList.add('d-none');
+    addTaskBtn.parentNode.parentNode.classList.add('d-none');
   }
   addTaskBtn_show_UI() {
-    addTaskBtn.classList.remove('d-none');
+    addTaskBtn.parentNode.parentNode.classList.remove('d-none');
   }
   editBtn_show_UI() {
     editBtn.classList.remove('d-none')
@@ -199,6 +133,7 @@ class UI {
         //console.log(hasActive(n.parentElement));
 
         //console.log(status);
+        event.stopPropagation();
         event.preventDefault();
         switch (status) {
           case 'Progress':
@@ -216,21 +151,89 @@ class UI {
   }
 
   listUI() {
+    let str ='';
+
+    str+=` <li class="w-100 px-4 py-3 bg-info mb-3">
+    <div class="d-flex">
+      <div class="me-auto d-inline-block">
+        <input type="checkbox" class="w-6 h-6 me-3 hascheck">
+        <span class="ff-Rob fs-3 todo-title">Type Something Here…</span>               
+      </div>
+      <div class="d-inline-block fs-3">
+        <a href="" class="markStar text-warning text-decoration-no">
+          <i class="fas fa-star"></i>
+        </a>
+        <a href="" class="edit-pencil text-black text-decoration-no">
+          <i class="fas fa-pencil-alt"></i>
+        </a>
+      </div>
+    </div>
+    <div class="record ps-4 ms-4 text-dark ">
+      <i class="far fa-comment-dots fs-5 me-3"></i>
+      <i class="far fa-file fs-5 me-3"></i>
+      <span class="calendar me-3">
+        <i class="far fa-calendar-alt fs-5 me-2"></i>
+        <span>6/18</span>
+      </span>              
+    </div>
+  </li>`;
 
   }
 
   setup() {
     this.navLink_click_UI();
-    addTaskBtn.addEventListener('click', () => {
+    addTaskBtn.addEventListener('click', (event) => {
+      console.log(addInput.value);
+      if(addInput.value == ''){
+        alert('請輸入任務')
+        return;
+      }
       this.addTaskBtn_hide_UI();
       this.editBtn_show_UI();
       this.editContent_show_UI();
     })
 
+    addInput.addEventListener('keyup',(event)=>{
+      //console.log(event.keyCode)
+      if(addInput.value.length == 0  ){
+        //alert('請輸入任務')
+        return;
+      }
+
+      if(event.keyCode == 13){
+        this.addTaskBtn_hide_UI();
+        this.editBtn_show_UI();
+        this.editContent_show_UI();
+      }
+    })
+
+    addInput.addEventListener('change',(e)=>{
+      //console.log(e.target.value); 
+      editTitle.textContent = e.target.value 
+      editObj.title = e.target.value ;
+      
+    })
+    
+    fupload.addEventListener('change',(event)=>{
+      let date = new Date()
+      //var selectedFile = document.getElementById('input').files[0];
+      //console.log(event.target.files[0])
+      editFileName.textContent = event.target.files[0].name;
+      editFileTime.textContent =`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+
+    })
+
+    // editCheck.addEventListener('change',(event)=>{
+      
+    // })
+
+
     fromCancel.addEventListener('click', () => {
       this.addTaskBtn_show_UI();
       this.editBtn_hide_UI();
       this.editContent_hide_UI();
+      addInput.value='';
+      editTitle.textContent='';
     })
     // fromAdd.addEventListener('click',()=>{
     //   // add  Comment   File Deadline
@@ -263,8 +266,11 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-
-
+// addInput.on('keyup ',(event)=>{
+//   console.log("Code: " + event.keyCode);
+//     console.log("Code: " + event.which);
+//     console.log("Code: " + window.event ? event.keyCode : event.which);
+// });
 
 
 // <i class="fas fa-pencil-alt"></i>

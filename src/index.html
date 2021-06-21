@@ -34,25 +34,27 @@
       <!-- ADD Task -->
       <section class="d-flex justify-content-center mb-3">
         <!-- <input type="button" class="w-50 bg-white text-black" placeholder="+ Add Task"> -->
-        <button id="addTaskBtn" class="w-50 px-3 bg-white border-0 d-flex justify-content-start">
+        <div  class="w-50 px-3 bg-white border-0 d-flex justify-content-start">
           <p class="p-2 m-0 text-gray fs-3 ff-Rob">
-            <i class="fas fa-plus me-2"></i>
-            Add Task
+            <button id="addTaskBtn" class="outline-0 border-0 bg-white text-gray ">
+              <i  class="fas fa-plus me-2"></i>
+            </button>            
+            <input type="text" class="addInput border-0 outline-0  text-gray"  placeholder="AddTask" required>            
           </p>
-        </button>
+        </div>
       </section>
       <!-- ADD Task End-->
       <!-- Edit Button -->
       <section class="editBtn d-flex justify-content-center mb-1 d-none">
         <div class="w-50 d-flex px-4 py-3 bg-light">
           <div class="me-auto d-inline-block">
-            <input type="checkbox" class="w-6 h-6 me-3">
-            <span class="ff-Rob fs-3">
+            <input type="checkbox" class="editCheck w-6 h-6 me-3" disabled>
+            <span class="ff-Rob fs-3 editTitle fw-bold">
              Type Something Here
             </span>            
           </div>
           <div class="d-inline-block fs-3">
-            <a href="" class="markStar text-black text-decoration-no">
+            <a href="" class="editStar text-black text-decoration-no">
               <i class="far fa-star"></i>
             </a>
             <a href="" class="edit-pencil-btn text-primary text-decoration-no">
@@ -68,15 +70,15 @@
           <form class="needvail bg-light p-5">
             <div class="form-control mb-5">
               <div class="ms-4">
-                <label for="yeardate" class="ps-3">
+                <label for="dateTime" class="ps-3">
                   <span><i class="far fa-calendar-alt fs-4"></i>
                   </span>
                   <span class="ff-Rob fs-4 ps-1">Deadline</span>
                 </label>
               </div>
               <div class="ps-5 ms-4">
-                <input id="yeardate" class="border-0 py-1 px-2" placeholder="yyyy/mm/dd">
-                <input id="timestamp" class="border-0 py-1 px-2" placeholder="hh:mm">
+                <!-- <input id="yeardate" type="date" class="border-0 py-1 px-2" placeholder="yyyy/mm/dd"> -->
+                <input id="editDateTime" type="datetime-local" class="border-0 py-1 px-2" placeholder="yyyy/mm/dd hh:mm">
               </div>
             </div>
 
@@ -89,15 +91,15 @@
               </div>
               <div class="ps-5 ms-4 d-flex">
                 <div class="me-3">
-                  <p class="m-0 fs-6 ff-Rob">
+                  <p id="editFileName" class="m-0 fs-6 ff-Rob">
                     20180514.zip
                   </p>
-                  <p class="m-0 text-dark ff-Rob">uploaded yesterday</p>
+                  <p id="editFileTime" class="m-0 text-dark ff-Rob">uploaded yesterday</p>
                 </div>
                 <label for="fupload" class="bg-gray px-3 py-2 c-p d-flex align-items-center">
                   <i class="fas fa-plus fs-5 text-white"></i>
                 </label>
-                <input id="fupload" type="file" hidden>
+                <input id="fupload" type="file" name="fupload" accept="image/*" hidden>
               </div>
             </div>
 
@@ -111,7 +113,7 @@
                 </label>
               </div>
               <div class="ps-5 ms-4">
-                <textarea id="message" rows="5" cols="42"></textarea>
+                <textarea id="editMessage" rows="5" cols="42"></textarea>
               </div>
             </div>
           </form>
@@ -135,7 +137,7 @@
             <div class="d-flex">
               <div class="me-auto d-inline-block">
                 <input type="checkbox" class="w-6 h-6 me-3 hascheck">
-                <span class="ff-Rob fs-3 todo-title">Type Something Here…</span>               
+                <span class="ff-Rob fs-3 ">Type Something Here…</span>               
               </div>
               <div class="d-inline-block fs-3">
                 <a href="" class="markStar text-warning text-decoration-no">
