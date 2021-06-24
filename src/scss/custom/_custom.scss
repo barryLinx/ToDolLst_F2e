@@ -27,6 +27,20 @@ ul.task-list{
   }  
 }
 
+.from-cancel {
+  &:hover{
+    background-color: $danger !important;
+    color: $cancelHover !important;
+  }
+  
+}
+.form-add{  
+  &:hover{
+    background-color: $white !important;
+    color: $okHover !important;
+  }
+}
+
 input.addInput::placeholder{
   color: $gray;
 }
