@@ -6,12 +6,13 @@ import { faFile, faCommentDots, faCalendarAlt } from '@fortawesome/fontawesome-f
 
 library.add(faPlus, faPencilAlt, faFile, faStar, faCommentDots, faCalendarAlt)
 
+// const element = {}; 進行clean
 const addInput = document.querySelector('.addInput');
 const addTaskBtn = document.querySelector('#addTaskBtn');
 
-const editCheck = document.querySelector('.editCheck'); //勾選是否完成
+//const editCheck = document.querySelector('.editCheck'); //勾選是否完成
 const editTitle = document.querySelector('.editTitle'); //編輯 新增 標題
-//const editPencilBtn = document.querySelector('.edit-pencil-btn');
+
 const editStar = document.querySelector('#editStar'); // 編輯 新增 重要
 const editBtn = document.querySelector('.editBtn'); //  編輯 
 const editContent = document.querySelector('.edit-content');
@@ -26,15 +27,18 @@ const formCancel = document.querySelector('.form-cancel');
 const formAdd = document.querySelector('.form-add');
 const formEdit = document.querySelector('#formEdit');
 //const formEdit = document.forms["formEdit"];
-const taskList = document.querySelector('.task-list');
+const taskList = document.querySelector('#TaskList');
+const Total = document.querySelector('#Total');
 
+
+// const element = {}; 進行clean
 
 let url = 'http://localhost:3030/data';
-let alldata=[];
+let alldata;
 let editObj = {
   //id: "",
   reminder: false,
-  status: "",
+  status: "Progress",
   title: "",
   upLoadFileName: {
     name: "",
@@ -43,34 +47,9 @@ let editObj = {
   dateTime: '',
   comment: ""
 };
+let addedit;
 
 //console.log('formEdit', formEdit);
-
-function delTitleDom(t) {
-  // let str = ` <del class="text-gray-200">
-  //          <span class="ff-Rob fs-3 todo-title">
-  //             Type Something Here…  
-  //          </span>
-  //       </del>`;
-  let title = document.createTextNode(t);
-  let del_dom = document.createElement('del');
-  del_dom.classList.add('text-gray-200');
-  let span_dom = document.createElement('span');
-  span_dom.classList.add('ff-Rob', 'fs-3', 'todo-title');
-  span_dom.appendChild(title);
-  del_dom.appendChild(span_dom);
-  console.log(del_dom);
-  return del_dom;
-}
-
-function spanTitleDom(t) {
-  let title = document.createTextNode(t);
-  let sapn = document.createElement('span');
-  sapn.classList.add('ff-Rob', 'fs-3');
-  sapn.appendChild(title);
-  return sapn;
-}
-
 
 
 /**
@@ -106,46 +85,65 @@ function hasActive(element) {
 // }
 
 function getSelectData(id) {
-  //console.log(id);
-  console.log("getSelectData",alldata);
-  let data = alldata.find(d => {
-    d.id == '1';
-  });
-  console.log(data);
-  return data;
-  //console.log(gg)
+  //console.log("getSelectData", alldata);
+  return alldata.find(d => d.id === parseInt(id));   //直接return
 }
 
 function removeData(id) {
-  return alldata.filter(d => {
-    d.id != id;
-  })
+  return alldata.filter(d => d.id != parseInt(id)) //直接return
 }
 
-class Event {
-  /**
- * 將mark放在最上面
- */
-  filterData_Event(data) {
+function sortData_Event(data) {
+  let mark = data.filter(d => {
+    return d.reminder == true;
+  });
 
-    let mark = data.filter(d => {
-      return d.reminder == true;
-    });
+  let nomark = data.filter(d => {
+    return d.reminder !== true;
+  });
 
-    let nomark = data.filter(d => {
-      return d.reminder !== true;
-    });
-
-     console.log(mark);
-     console.log(nomark);
-    //alldata.length = 0;
-    alldata = [...mark,...nomark];
-    console.log("alldata:",typeof alldata);
-  }
+  //console.log(mark);
+  //console.log(nomark);
+  //alldata.length = 0;
+  alldata = [...mark, ...nomark];
+  Total.textContent=`${alldata.length} tasks left`;
+  //index.jsconsole.log("filterData_Event:", alldata);
 }
+
+function filterData_Event(status) {
+  return alldata.filter(d =>
+    d.status == status
+  );
+}
+
+
 
 //display products UI
 class UI {
+  delTitleDom(t) {
+    // let str = ` <del class="text-gray-200">
+    //          <span class="ff-Rob fs-3 todo-title">
+    //             Type Something Here…  
+    //          </span>
+    //       </del>`;
+    let title = document.createTextNode(t);
+    let del_dom = document.createElement('del');
+    del_dom.classList.add('text-gray-200');
+    let span_dom = document.createElement('span');
+    span_dom.classList.add('ff-Rob', 'fs-3', 'todo-title');
+    span_dom.appendChild(title);
+    del_dom.appendChild(span_dom);
+    console.log(del_dom);
+    return del_dom;
+  }
+
+  spanTitleDom(t) {
+    let title = document.createTextNode(t);
+    let sapn = document.createElement('span');
+    sapn.classList.add('ff-Rob', 'fs-3');
+    sapn.appendChild(title);
+    return sapn;
+  }
   /**
    * 改變 標題 樣式 加上 <del></del>
    */
@@ -153,41 +151,114 @@ class UI {
     const inputCheckDom = [...document.querySelectorAll('.hascheck')];
     inputCheckDom.forEach(el => {
       el.addEventListener('change', (event) => {
+        //event.preventDefault();
         //el.insertAdjacentHTML("afterend", delHtml());
         //console.log(el.parentNode);
         //console.log(event.currentTarget.checked);
-        let elParentNode = el.parentNode;
-        let elNextEleSib = el.nextElementSibling;
+        //let elParentNode = el.parentNode;
+        //let elNextEleSib = el.nextElementSibling;
         //console.log(el.nextElementSibling.textContent);
+        let sdata = getSelectData(el.dataset.id);// refence address
 
         if (event.currentTarget.checked) {
           editObj.status = 'Completed';
-          elParentNode.replaceChild(delTitleDom(elNextEleSib.textContent), elNextEleSib);
+          sdata.status = 'Completed'; //alldata之中 的data,status狀態 
+          //elParentNode.replaceChild(this.delTitleDom(elNextEleSib.textContent), elNextEleSib);
+          //fdata.push(sdata);
         } else {
-          editObj.status = '';
-          elParentNode.replaceChild(spanTitleDom(elNextEleSib.textContent), elNextEleSib);
+          editObj.status = 'Progress';
+          sdata.status = 'Progress'; //alldata之中 的data,status狀態 
+          // elParentNode.replaceChild(this.spanTitleDom(elNextEleSib.textContent), elNextEleSib);
         }
+
+        this.listUI(alldata);//因為是記憶體位置參考，sdata改變後 alldata中的那筆相同記憶體位置資料也會改變
+
+        //把資料 傳回 db.json alldata
+        putData(sdata);
       })
     })
   }
 
+  /**
+   * 做資料至頂處理，不必處理樣式
+   */
   markStar_click() {
+    //console.log("mark",alldata);
     const markStar = [...document.querySelectorAll('.markStar')];
-    markStar.forEach(s => {
-      s.addEventListener('click', (e) => {
-        e.preventDefault();
-        //console.log(s.dataset.id)        
-        let seldata = getSelectData(s.dataset.id);//選出要改變的data
-        //console.log(seldata);
-        console.log(e.target.parentElement);
-        let fdata = removeData(s.dataset.id);//從集合移除data，
-        fdata.unshift(seldata);//再加入最前面
-        alldata.length = 0;
-        alldata = fdata;
+    markStar.forEach(el => {
+      //console.log(el);
+      el.addEventListener("change", (e) => {
+        //e.preventDefault();
+        //console.log(el.dataset.id);
+        let seldata = getSelectData(el.dataset.id);//選出要改變的data
+        console.log((e.currentTarget.checked));
+        //console.log(el.previousElementSibling);
+        //putData()
+        //console.log(el.previousElementSibling.children[0]);
+        let fdata = removeData(el.dataset.id);//從集合移除data，
+        //console.log(fdata);
 
-        //this.listUI(alldata);
+        // alldata 更改處理
+        if (e.currentTarget.checked) {
+          seldata.reminder = true;
+          fdata.unshift(seldata);  //再加入最前面
+        } else {
+          seldata.reminder = false; //沒有標記，不用再加入最前面
+        }
+
+        alldata = fdata;
+        //做Http put
+        putData(seldata);
+        this.listUI(alldata);
+
+        //alldata.length = 0;   
       })
     })
+  }
+
+  editpencel() {
+    const editPencilBtn = [...document.querySelectorAll('.edit-pencil')];
+    //console.log(editPencilBtn);
+    editPencilBtn.forEach(el => {
+      //console.log(el)
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        this.addTaskBtn_hide_UI();
+        this.editBtn_show_UI();
+        this.editContent_show_UI();
+        //el.dataset.id;
+        let sdata = getSelectData(el.dataset.id);
+        let {id,status,title,reminder,comment,dateTime,upLoadFileName} = sdata;
+        editTitle.value = title;
+        editStar.checked = reminder;
+        editDateTime.value = dateTime;
+        editMessage.value = comment;
+        
+        editObj.id = id;
+        editObj.title = title;
+        editObj.status = status;
+        editObj.reminder = reminder;
+        editObj.comment= comment;
+        editObj.dateTime = dateTime;
+        editObj.upLoadFileName.name = upLoadFileName.name;
+        editObj.upLoadFileName.lastModifiedDate = upLoadFileName.lastModifiedDate;
+       
+        //scroll 卷軸向上
+        window.scrollTo({
+          top: 0,
+          behavior: "instant"
+        });
+        //save 更新資料 put
+        // formAddEdit_click(sdata, 'Save')
+        addedit = 'Save';
+        formAdd.innerHTML = ' <i class="fas fa-plus me-3"></i> Save';
+
+      })
+
+    })
+
+
   }
 
   addTaskBtn_hide_UI() {
@@ -211,25 +282,37 @@ class UI {
     editContent.classList.add('d-none')
   }
   navLink_click_UI() {
+    let fdata;
     //let hasActive=true;
     navLinkDom.forEach(n => {
       let status = n.dataset.st;
       n.addEventListener('click', (event) => {
         hasActive(n.parentElement)
         //console.log(hasActive(n.parentElement));
-
         //console.log(status);
         event.stopPropagation();
         event.preventDefault();
+        console.log(status);
         switch (status) {
           case 'Progress':
-            filter_Event('Progress')
+            fdata = filterData_Event(status);           
+            Total.textContent=`${fdata.length} tasks left`;
+            this.listUI(fdata);
+            // restart render UI 
+            //filter_Event('Progress')
             break;
           case 'Completed':
-            filter_Event('Completed')
+            fdata = filterData_Event(status);            
+            Total.textContent=`${fdata.length} tasks left`;
+            this.listUI(fdata);
+            // restart render UI
+            //filter_Event('Completed')
             break;
           default:
-            filter_Event();
+            sortData_Event(alldata);
+            Total.textContent=`${fdata.length} tasks left`;
+            this.listUI(alldata);
+            //filterData_Event();
             break;
         }
       })
@@ -238,18 +321,24 @@ class UI {
 
   listUI(data) {
     let str = '';
+    //console.log(data);
     data.forEach(d => {
       str += ` <li class="w-100 px-4 py-3 ${d.reminder ? 'bg-info' : 'bg-light'} mb-3">
   <div class="d-flex">
     <div class="me-auto d-inline-block">
-      <input type="checkbox" class="w-6 h-6 me-3 hascheck">
-      <span class="ff-Rob fs-3 todo-title">${d.title}</span>               
+      <input id="hascheck_${d.id}" data-id='${d.id}'  type="checkbox" class="w-6 h-6 me-3 hascheck" ${d.status == 'Completed' ? 'checked' : ''}>
+      ${d.status == 'Completed' ?
+          `<del class="text-gray-200"> <span class="ff-Rob fs-3 todo-title">${d.title}</span></del>`
+          : `<span class="ff-Rob fs-3 todo-title">${d.title}</span>  `}
+                   
     </div>
     <div class="d-inline-block fs-3">
-      <a href="" data-id=${d.id} class="markStar ${d.reminder ? 'text-warning' : 'text-black'}  text-decoration-no">
-        <i class="${d.reminder ? 'fas' : 'far'} fa-star"></i>
-      </a>
-      <a href="" class="edit-pencil text-black text-decoration-no">
+       <label for="markStar_${d.id}"  text-decoration-no">
+           <i class="${d.reminder ? 'fas text-warning' : 'far text-black'} fa-star"></i>
+        </label>
+       <input id="markStar_${d.id}" data-id="${d.id}" class="markStar" type="checkbox" ${d.reminder ? 'checked' : ''}  hidden>
+    
+      <a href="" data-id='${d.id}' class="edit-pencil text-black text-decoration-no">
         <i class="fas fa-pencil-alt"></i>
       </a>
     </div>
@@ -265,10 +354,14 @@ class UI {
 </li>`;
     })
     taskList.innerHTML = str;
+    this.inputcheck_change(); //不知為何要放這，難道是記憶體問題
+    this.markStar_click(); //不知為何要放這，難道是記憶體問題
+    this.editpencel(); //不知為何要放這，難道是記憶體問題
   }
 
   setup() {
     this.navLink_click_UI();
+
     addTaskBtn.addEventListener('click', (event) => {
       // console.log(addInput.value);
       if (addInput.value == '') {
@@ -294,6 +387,9 @@ class UI {
         this.addTaskBtn_hide_UI();
         this.editBtn_show_UI();
         this.editContent_show_UI();
+        formAdd.innerHTML = `<i class="fas fa-plus me-3"></i>
+        Add Task`;
+        addedit = 'Add';
       }
     })
 
@@ -350,27 +446,50 @@ class UI {
       this.editBtn_hide_UI();
       this.editContent_hide_UI();
       addInput.value = '';
-      //editTitle.textContent = '';
+      
       editTitle.value = ''
+      editDateTime.value='';
+      editMessage.value='';
     })
 
     formAdd.addEventListener('click', (e) => {
       //e.preventDefault();
-      const formData = new FormData(formEdit);
-      const formProps = Object.fromEntries(formData);
+      // const formData = new FormData(formEdit);
+      // const formProps = Object.fromEntries(formData);
       // console.log(editMessage.value);
-      editObj.comment = editMessage.value;
-      //editObj.id = 123;
-      editObj.dateTime = formProps.editDateTime;
-      //DTO.postData(editObj);
-      postData(editObj);
-      //console.log(editObj);     
+      // console.log();   
+      //addedit = 'Add';    
+      formAddEdit_click();
+     
+      //console.log(editObj);
     })
+    //this.editpencel();
+
+
   }
 };
 
-function sendHttpReq(method, url, data) {
+function formAddEdit_click() {
+  editObj.comment = editMessage.value;
+  editObj.dateTime = editDateTime.value;
+  console.log(editObj);
 
+  switch (addedit) {
+    case 'Save':      
+      console.log('PUT');
+      putData(editObj);
+      break;
+    case 'Add':  
+      console.log('POST');   
+      postData(editObj);
+      break;
+    default:
+      break;
+  }
+
+}
+
+function sendHttpReq(method, url, data) {
   const p = new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
@@ -401,7 +520,7 @@ function sendHttpReq(method, url, data) {
 async function getData() {
   let data;
   await sendHttpReq('GET', url).then(res => {
-    //console.log(res)
+    console.log(res)
     data = res;
   });
   return data;
@@ -413,7 +532,8 @@ async function postData(data) {
     console.log("POST =>", res); //xhr.status === 201 才有回應
     getData().then(data => {
       //console.log(data);
-      alldata = data;
+      //alldata = data;
+      sortData_Event(data);//排序
       ui.listUI(alldata);
       ui.addTaskBtn_show_UI();
       ui.editBtn_hide_UI();
@@ -422,23 +542,22 @@ async function postData(data) {
       editTitle.textContent = '';
     })
   });
-
-
 }
 
-//console.log('POST =>', data);
-//const ui = new UI();
-
-//local storage
-// class Storage {
-//   static saveTask(task) {
-//     localStorage.setItem("task", JSON.stringify(task));
-//   }
-//   static getTask(id) {
-//     let tasks = JSON.parse(localStorage.getItem('task'));
-//     return tasks.find(t => t.id === id)
-//   }
-// };
+async function putData(data) {
+  let ui = new UI();
+  await sendHttpReq('PUT', url + `/${data.id}`, data).then(res => {
+    console.log("PUT =>", res); //xhr.status == 201   
+    ui.addTaskBtn_show_UI();
+    ui.editBtn_hide_UI();
+    ui.editContent_hide_UI();
+  }).then(()=>{
+    getData().then(data =>{
+      sortData_Event(data);//排序
+      ui.listUI(alldata);
+    })
+  })
+}
 
 
 /**
@@ -446,29 +565,27 @@ async function postData(data) {
  */
 document.addEventListener('DOMContentLoaded', () => {
   const ui = new UI();
-  const event = new Event();
+  //const event = new Event();
   //const dto = new DTO();
   ui.setup();
 
   getData().then(data => {
     //console.log(data);
     //alldata = data;
-    event.filterData_Event(data);
+    sortData_Event(data);
     ui.listUI(alldata);
-  }).then(() => {
-    ui.inputcheck_change();
-    ui.markStar_click();
+    //ui.editpencel();
+    //ui.inputcheck_change();
+    //ui.markStar_click();
   })
+
   //navLink_click();
+  //  ui.inputcheck_change();
+  //   ui.markStar_click();
 
 })
 
 
-// addInput.on('keyup ',(event)=>{
-//   console.log("Code: " + event.keyCode);
-//     console.log("Code: " + event.which);
-//     console.log("Code: " + window.event ? event.keyCode : event.which);
-// });
 
 
 // <i class="fas fa-pencil-alt"></i>

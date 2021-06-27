@@ -34,7 +34,7 @@
       <!-- ADD Task -->
       <section class="d-flex justify-content-center mb-3">
         <!-- <input type="button" class="w-50 bg-white text-black" placeholder="+ Add Task"> -->
-        <div  class="w-50 px-3 bg-white border-0 d-flex justify-content-start">
+        <div class="w-50 px-3 bg-white border-0 d-flex justify-content-start">
           <p class="p-2 m-0 text-gray fs-3 ff-Rob">
             <button id="addTaskBtn" class="outline-0 border-0 bg-white text-gray ">
               <i  class="fas fa-plus me-2"></i>
@@ -136,17 +136,19 @@
       <!-- Edit Content End -->
       <!-- List -->
       <section class="list d-flex justify-content-center">
-        <ul class="task-list w-50 ps-0">
-          <li class="w-100 px-4 py-3 bg-info mb-3">
+        <ul id="TaskList" class="task-list w-50 ps-0">
+          <!-- <li class="w-100 px-4 py-3 bg-info mb-3">
             <div class="d-flex">
               <div class="me-auto d-inline-block">
                 <input type="checkbox" class="w-6 h-6 me-3 hascheck">
                 <span class="ff-Rob fs-3 ">Type Something Here…</span>               
               </div>
               <div class="d-inline-block fs-3">
-                <a href="" class="markStar text-warning text-decoration-no">
+                <label for="markStar" class=" text-warning text-decoration-no">
                   <i class="fas fa-star"></i>
-                </a>
+                </label>
+                <input id="markStar" class="markStar" type="checkbox" name="markStar" hidden>
+             
                 <a href="" class="edit-pencil text-black text-decoration-no">
                   <i class="fas fa-pencil-alt"></i>
                 </a>
@@ -160,7 +162,7 @@
                 <span>6/18</span>
               </span>              
             </div>
-          </li>
+          </li> -->
 
           <!-- <li class="w-100 px-4 py-3 bg-light mb-3">
             <div class="d-flex">
@@ -220,7 +222,7 @@
       <!-- List End-->
       <!-- Total Task -->
       <section class=" d-flex justify-content-center mb-3">        
-          <p class="text-gray fs-3 w-50 ">
+          <p id="Total" class=" text-gray fs-3 w-50 ">
             4 tasks left
           </p>
       </section>
