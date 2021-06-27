@@ -37,20 +37,20 @@
         <div class="w-50 px-3 bg-white border-0 d-flex justify-content-start">
           <p class="p-2 m-0 text-gray fs-3 ff-Rob">
             <button id="addTaskBtn" class="outline-0 border-0 bg-white text-gray ">
-              <i  class="fas fa-plus me-2"></i>
+              <i class="fas fa-plus me-2"></i>
             </button>            
-            <input type="text" class="addInput border-0 outline-0  text-gray"  placeholder="AddTask" required>            
+            <input id="addInput" type="text" class=" border-0 outline-0  text-gray"  placeholder="AddTask" required>            
           </p>
         </div>
       </section>
       <!-- ADD Task End-->
       <!-- Edit Button -->
-      <section class="editBtn d-flex justify-content-center mb-1 d-none">
+      <section id="editBtn" class=" d-flex justify-content-center mb-1 d-none">
         <div class="w-50 d-flex px-4 py-3 bg-light">
           <div class="me-auto d-inline-block">
             <input type="checkbox" class="editCheck w-6 h-6 me-3" disabled>
             <span class="ff-Rob fs-3  fw-bold">
-              <input type="text" class="editTitle bg-light border-secondary  border-top-0 border-start-0 border-end-0 outline-0  text-gray">            
+              <input id="editTitle" type="text" class="edit-title bg-light border-secondary  border-top-0 border-start-0 border-end-0 outline-0  text-gray">            
             </span>            
           </div>
           <div class="d-inline-block fs-3">
@@ -58,9 +58,7 @@
               <i class="far fa-star"></i>
             </label>
             <input id="editStar" type="checkbox" name="editstart" hidden>
-            <!-- <a href="" class="editStar  text-decoration-no p-4" data-mark="false">
-              <i class="far fa-star"></i>
-            </a> -->
+           
             <a href="" class="edit-pencil-btn text-primary text-decoration-no">
               <i class="fas fa-pencil-alt"></i>
             </a>
@@ -69,7 +67,7 @@
       </section>
       <!-- Edit Button End-->
       <!-- Edit Content -->
-      <section class="edit-content d-flex justify-content-center mb-3 d-none">
+      <section id="editContent" class="edit-content d-flex justify-content-center mb-3 d-none">
         <div class="d-flex flex-column w-50">
           <form id="formEdit" name="formEdit"  class="needvail bg-light p-5">
             <div class="form-control mb-5">
@@ -122,11 +120,11 @@
             </div>
           </form>
           <div class="footer d-flex justify-content-center">
-            <button class="form-cancel w-50 fs-3 p-3 border-0 bg-white text-danger ff-Rob">
+            <button id="formCancel" class="form-cancel w-50 fs-3 p-3 border-0 bg-white text-danger ff-Rob">
               <i class="fas fa-times me-3"></i>
               Cancel
             </button>
-            <button  type="submit" class="form-add w-50 fs-3 p-3 border-0 bg-primary text-white ff-Rob">
+            <button id="formAdd"  type="submit" class="form-add w-50 fs-3 p-3 border-0 bg-primary text-white ff-Rob">
               <i class="fas fa-plus me-3"></i>
               Add Task
             </button>
