@@ -338,7 +338,7 @@ class UI {
                    
     </div>
     <div class="d-inline-block fs-3">
-       <label for="markStar_${d.id}"  text-decoration-no">
+       <label for="markStar_${d.id}" class="text-decoration-no">
            <i class="${d.reminder ? 'fas text-warning' : 'far text-black'} fa-star"></i>
         </label>
        <input id="markStar_${d.id}" data-id="${d.id}" class="markStar" type="checkbox" ${d.reminder ? 'checked' : ''}  hidden>
